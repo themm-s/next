@@ -8,7 +8,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Next App</title>
+        <title>Админ панель</title>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>{children}</body>
     </html>

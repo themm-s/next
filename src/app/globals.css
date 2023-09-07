@@ -19,12 +19,12 @@ li > a {
   border: aqua;
   padding: 10px;
   width: 90%;
+  border-radius: 5px;
 }
 
 li > a:hover {
-  border-left: 2px solid aqua;
-  box-shadow: 1px 3px 5px aqua;
-  transform: translateX(4px);
+  box-shadow: 3px 3px 6px aqua;
+  transform: translateX(4px) translateY(-2px);
 }
 
 svg {
