@@ -15,12 +15,16 @@ nav {
 li > a {
   display: flex;
   align-items: center;
-  transition: all 0.3s;
+  transition: .5s;
+  border: aqua;
+  padding: 10px;
+  width: 90%;
 }
 
-li > a:hover::before {
-  content: "1";
-  
+li > a:hover {
+  border-left: 2px solid aqua;
+  box-shadow: 1px 3px 5px aqua;
+  transform: translateX(4px);
 }
 
 svg {
