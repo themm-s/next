@@ -3,6 +3,26 @@
 @tailwind utilities;
 
 body {
-  background-color: black;
-  color: white;
+  background-color: #000f28;
+  color: #adadad;
+}
+
+nav {
+  background-color: #001335;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+li > a {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+li > a:hover::before {
+  content: "1";
+  
+}
+
+svg {
+  margin-right: 20px;
 }
