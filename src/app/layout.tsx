@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import Sidebar from "../components/Sidebar/Sidebar";
+
 export default function RootLayout({
   children,
 }: {
@@ -11,7 +13,9 @@ export default function RootLayout({
         <title>Админ панель</title>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Sidebar content={children} />
+      </body>
     </html>
   );
 }

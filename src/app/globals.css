@@ -7,26 +7,38 @@ body {
   color: #adadad;
 }
 
-nav {
+aside {
   background-color: #001335;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-li > a {
+a {
   display: flex;
   align-items: center;
-  transition: .5s;
+  transition: .5s ease-out;
+  
   border: aqua;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
   padding: 10px;
   width: 90%;
   border-radius: 5px;
 }
 
-li > a:hover {
+a:hover {
   box-shadow: 3px 3px 6px aqua;
-  transform: translateX(4px) translateY(-2px);
+  transform: translateX(2px) translateY(-1px);
+}
+
+ul {
+  padding-left: 1.25rem;
 }
 
 svg {
   margin-right: 20px;
+}
+
+hr {
+  border: 1px solid #737373;
+  margin-right: 1.25rem;
+  width: 50%;
 }
