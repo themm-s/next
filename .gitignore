@@ -14,8 +14,10 @@
 
 # production
 /build
-
+firebase/
 # misc
+*.env
+.env
 .DS_Store
 *.pem
 

@@ -2,6 +2,8 @@
 import "./globals.css";
 
 import Sidebar from "../components/Sidebar/Sidebar";
+import { store } from "@/store/store";
+import { Provider } from "react-redux";
 
 export default function RootLayout({
   children,
@@ -15,7 +17,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>
-        <Sidebar content={children} />
+        <Provider store={store}>
+          <Sidebar content={children} />
+        </Provider>
       </body>
     </html>
   );
