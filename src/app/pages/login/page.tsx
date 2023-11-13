@@ -1,10 +1,10 @@
 "use client";
 
-import { auth } from "@/firebase";
+import { UID, auth } from "@/firebase";
 import { setUsers } from "@/store/Reducers/userLogin";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -12,6 +12,7 @@ export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.login.user?.uid == UID);
 
   const setUser = (payload: any) => {
     dispatch(setUsers(payload));
@@ -41,7 +42,7 @@ export default function Login() {
     clearInputs();
   }, []);
 
-  return (
+  return user ? <h1>Вы уже вошли</h1> : (
     <div>
       <br />
       <form onSubmit={signIn} className="flex flex-col w-1/4 space-y-3">

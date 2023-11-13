@@ -1,7 +1,7 @@
 "use client";
 import { UID, auth } from "@/firebase";
 import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Apanel() {
@@ -22,7 +22,7 @@ export default function Apanel() {
   };
 
   return !user ? <h1>Доступ запрещён</h1> : (
-    <form onSubmit={signUp} className="flex flex-col w-1/4 space-y-3">
+    <form onSubmit={signUp} className="flex flex-col w-1/12 space-y-3">
       <label>
         Email:
         <input type="email" name="email"
