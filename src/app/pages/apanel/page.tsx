@@ -22,23 +22,29 @@ export default function Apanel() {
   };
 
   return !user ? <h1>Доступ запрещён</h1> : (
-    <form onSubmit={signUp} className="flex flex-col w-1/12 space-y-3">
+    <form onSubmit={signUp} className="flex flex-col space-y-3">
       <label>
-        Email:
+        <p>
+          Email:
+        </p>
         <input type="email" name="email"
           onChange={(e) => setEmail(e.target.value)} />
       </label>
       <label>
-        Password:
+        <p>
+          Password:
+        </p>
         <input type="password" name="password"
           onChange={(e) => setPassword(e.target.value)} />
       </label>
       <label>
-        Nickname:
+        <p>
+          Nickname:
+        </p>
         <input type="text" name="Nickname"
           onChange={(e) => setNickname(e.target.value)} />
       </label>
-      <button type="submit">Добавить пользователя</button>
+      <button type="submit" className="text-left">Добавить пользователя</button>
     </form>
   );
 }

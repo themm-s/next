@@ -45,16 +45,20 @@ export default function Login() {
   return user ? <h1>Вы уже вошли</h1> : (
     <div>
       <br />
-      <form onSubmit={signIn} className="flex flex-col w-1/4 space-y-3">
+      <form onSubmit={signIn} className="flex flex-col space-y-3">
         <label className="">
-          Email:
+          <p>
+            Email:
+          </p>
           <input type="email" name="email" ref={emailRef} onChange={(e) => setEmail(e.target.value)} />
         </label>
         <label>
-          Password:
+          <p>
+            Password:
+          </p>
           <input type="password" ref={passwordRef} name="password" onChange={(e) => setPassword(e.target.value)} />
         </label>
-        <button type="submit">Войти</button>
+        <button type="submit" className="text-left">Войти</button>
       </form>
     </div>
   );

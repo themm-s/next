@@ -54,6 +54,7 @@ export default async function Dashboard() {
     filter.page++;
     revalidatePath('/pages/dashboard');
   };
+
   return (
     <div>
       <form action={prevPage}>
