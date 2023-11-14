@@ -3,7 +3,7 @@ import { faChartPie } from "@fortawesome/free-solid-svg-icons/faChartPie";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons/faChartSimple";
 import { faFaceLaugh } from "@fortawesome/free-solid-svg-icons/faFaceLaugh";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/firebase/index";
@@ -13,6 +13,7 @@ export default function Sidebar({ content }: { content: React.ReactNode; }) {
   const [authUser, setAuthUser] = useState(null);
   const dispatch = useDispatch();
   const [storage, setStorage] = useState<string | null>(null);
+  const displayName = useSelector((state: any) => state.login.user?.displayName);
 
   const setUser = (payload: any) => {
     dispatch(setUsers(payload));
@@ -55,7 +56,7 @@ export default function Sidebar({ content }: { content: React.ReactNode; }) {
       <aside className="inset-0 fixed top-0 left-0 z-40 p-2 h-screen w-96 font-bold">
         <ul className="mt-72 space-y-6">
           {storage ? (
-            <p className="text-center">Здравствуйте {auth.currentUser?.displayName}</p>
+            <p className="text-center">Здравствуйте {displayName}</p>
           ) : (
             <a href="/pages/login" className="justify-center">Логин</a>
           )}
