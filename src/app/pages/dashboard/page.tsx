@@ -56,35 +56,37 @@ export default async function Dashboard() {
   };
 
   return (
-    <div>
-      <form action={prevPage}>
-        <button>Назад</button>
-      </form>
-      <form action={nextPage}>
-        <button>Вперед</button>
-      </form>
+    <div className="space-y-3">
       <form className="flex flex-col" action={submit}>
         <label>
           <p>
-            username:
+            Username:
           </p>
           <input type="text" name="username" />
         </label>
-        <button>Add</button>
+        <button className="self-start mt-3 bg-blue-900 text-black p-1 rounded">Add</button>
       </form>
-      <form action={changeFilter}>
-        <button>
-          <select name="sortBy">
+      <form action={changeFilter} className="flex">
+        <button type="button">
+          <select name="sortBy" className="p-1 rounded">
             <option value="desc">Сначала новые</option>
             <option value="asc">Сначала старые</option>
           </select>
         </button>
       </form>
-      <ul>
+      <ul className="flex flex-col">
         {users.map((user) => (
           <li key={user.id}>{user.username}</li>
         ))}
       </ul>
-    </div>
+      <div className="flex space-x-3">
+        <form action={prevPage}>
+          <button type="button">Назад</button>
+        </form>
+        <form action={nextPage}>
+          <button type="button">Вперед</button>
+        </form>
+      </div>
+    </div >
   );
 };

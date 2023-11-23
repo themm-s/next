@@ -1,6 +1,6 @@
 "use client";
 import { UID, auth } from "@/firebase";
-import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -13,12 +13,15 @@ export default function Apanel() {
     const password = data.get("password") as string;
     const nickname = data.get("nickname") as string;
 
-    await createUserWithEmailAndPassword(auth, email, password)
-      .catch((error) => { setError(error); });
 
-    await updateProfile(auth.currentUser!, {
-      displayName: nickname || null
-    }).catch((error) => { console.error(error); });
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        await updateProfile(user, {
+          displayName: nickname || null
+        }).catch((error) => { console.error(error); });
+      })
+      .catch((error) => { setError(error); });
   };
 
   return !user ? <h1>Доступ запрещён</h1> : (
@@ -27,21 +30,21 @@ export default function Apanel() {
         <p>
           Email:
         </p>
-        <input type="email" name="email" />
+        <input type="email" name="email" className="p-1 rounded" />
       </label>
       <label>
         <p>
           Password:
         </p>
-        <input type="password" name="password" />
+        <input type="password" name="password" className="p-1 rounded" />
       </label>
       <label>
         <p>
           Nickname:
         </p>
-        <input type="text" name="nickname" />
+        <input type="text" name="nickname" className="p-1 rounded" />
       </label>
-      <button type="submit" className="text-left">Добавить пользователя</button>
+      <button className="text-left">Добавить пользователя</button>
     </form>
   );
 }

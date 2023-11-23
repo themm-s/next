@@ -12,6 +12,7 @@ import { setUsers } from "@/store/Reducers/userLogin";
 export default function Sidebar({ content }: { content: React.ReactNode; }) {
   const [authUser, setAuthUser] = useState(null);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   const [storage, setStorage] = useState<string | null>(null);
   const displayName = useSelector((state: any) => state.login.user?.displayName);
 
@@ -37,9 +38,11 @@ export default function Sidebar({ content }: { content: React.ReactNode; }) {
         setAuthUser(user);
         localStorage.setItem('user', 'true');
         setUser(user);
+        setIsLoading(false);
       } else {
         setAuthUser(null);
         setUser(null);
+        setIsLoading(false);
       }
       return () => {
         listen();
@@ -51,31 +54,38 @@ export default function Sidebar({ content }: { content: React.ReactNode; }) {
     console.log(authUser);
   }, [authUser]);
 
-  return (
+  return isLoading ?
     <>
       <aside className="inset-0 fixed top-0 left-0 z-40 p-2 h-screen w-96 font-bold">
         <ul className="mt-72 space-y-6">
-          {storage ? (
-            <p className="text-center">Здравствуйте {displayName}</p>
-          ) : (
-            <a href="/pages/login" className="justify-center">Логин</a>
-          )}
-          <hr />
-          <a href="/pages/dashboard"><FontAwesomeIcon icon={faFileLines} className="w-6 text-center" />Панель</a>
-          <a href="/pages/perfomance"><FontAwesomeIcon icon={faChartSimple} className="w-6 text-center" />Производительность</a>
-          <a href="/pages/followers" className="mb-72"><FontAwesomeIcon icon={faFaceLaugh} className="w-6 text-center" />Пользователи</a>
-          {authUser ? (
-            <>
-              <hr />
-              <a href="/pages/apanel"><FontAwesomeIcon icon={faChartPie} className="w-6 text-center" />
-                Админ панель
-              </a>
-              {!authUser ? null : <button className="text-center justify-center" onClick={userSignOut}>Выйти из аккаунта</button>}
-            </>
-          ) : null}
+          <p className="text-center">Загрузка...</p>
         </ul>
       </aside>
-      <div className="ml-96 p-4">{content}</div>
-    </>
-  );
+    </> : (
+      <>
+        <aside className="inset-0 fixed top-0 left-0 z-40 p-2 h-screen w-96 font-bold">
+          <ul className="mt-72 space-y-6">
+            {storage ? (
+              <p className="text-center">Здравствуйте {displayName}</p>
+            ) : (
+              <a href="/pages/login" className="justify-center">Логин</a>
+            )}
+            <hr />
+            <a href="/pages/dashboard"><FontAwesomeIcon icon={faFileLines} className="w-6 text-center" />Панель</a>
+            <a href="/pages/perfomance"><FontAwesomeIcon icon={faChartSimple} className="w-6 text-center" />Производительность</a>
+            <a href="/pages/followers" className="mb-72"><FontAwesomeIcon icon={faFaceLaugh} className="w-6 text-center" />Пользователи</a>
+            {authUser ? (
+              <>
+                <hr />
+                <a href="/pages/apanel"><FontAwesomeIcon icon={faChartPie} className="w-6 text-center" />
+                  Админ панель
+                </a>
+                {!authUser ? null : <button className="text-center justify-center" onClick={userSignOut}>Выйти из аккаунта</button>}
+              </>
+            ) : null}
+          </ul>
+        </aside>
+        <div className="ml-96 p-4">{content}</div>
+      </>
+    );
 }

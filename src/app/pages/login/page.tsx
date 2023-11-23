@@ -7,8 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
@@ -18,17 +16,12 @@ export default function Login() {
     dispatch(setUsers(payload));
   };
 
-  const clearInputs = (e?: any) => {
-    setEmail('');
-    setPassword('');
-  };
-
-  const signIn = async (e: any) => {
-    e.preventDefault();
+  const signIn = async (data: FormData) => {
+    const email = data.get("email") as string;
+    const password = data.get("password") as string;
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setUser(userCredential.user);
-        clearInputs();
         window.location.href = '/pages/apanel';
       })
       .catch((error) => {
@@ -39,24 +32,23 @@ export default function Login() {
   };
 
   useEffect(() => {
-    clearInputs();
   }, []);
 
   return user ? <h1>Вы уже вошли</h1> : (
     <div>
       <br />
-      <form onSubmit={signIn} className="flex flex-col space-y-3">
+      <form action={signIn} className="flex flex-col space-y-3">
         <label className="">
           <p>
             Email:
           </p>
-          <input type="email" name="email" ref={emailRef} onChange={(e) => setEmail(e.target.value)} />
+          <input type="email" name="email" className="p-1 rounded" />
         </label>
         <label>
           <p>
             Password:
           </p>
-          <input type="password" ref={passwordRef} name="password" onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" name="password" className="p-1 rounded" />
         </label>
         <button type="submit" className="text-left">Войти</button>
       </form>
